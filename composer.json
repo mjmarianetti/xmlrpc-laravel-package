@@ -4,8 +4,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Martin Marianetti",
-            "email": ""
+            "name": "Martin Marianetti"
         }
     ],
     "require": {
