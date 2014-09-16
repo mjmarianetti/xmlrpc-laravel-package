@@ -62,7 +62,7 @@ class Xmlrpc {
         $content['title'] = $title;
         $content['description'] = utf8_encode($body);
         $content['wp_post_thumbnail'] = $idImg;
-        $content['categories'] = $category;
+        $content['terms_names'] = $category;
         $content['mt_keywords'] = $keywords;
         $mensaje = new \xmlrpcmsg('metaWeblog.newPost');
         $mensaje->addParam(new \xmlrpcval(''));
