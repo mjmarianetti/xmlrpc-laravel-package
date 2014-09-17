@@ -43,7 +43,7 @@ class Xmlrpc {
         $mensaje->addParam(php_xmlrpc_encode(array('name' => 'imagen' . mt_rand() . '.jpg', 'type' => 'image/jpg', 'bits' => new \xmlrpcval($theData, 'base64'), 'overwrite' => true)));
         $resp = $this->client->send($mensaje);
         if ($resp->faultCode()) {
-            die('KO. Error uploading: ' . $resp->faultCode() . ' - ' . $resp->faultString());
+           return 'KO. Error uploading: ' . $resp->faultCode() . ' - ' . $resp->faultString();
         }
         $resultado = $resp->value();
         return $resultado['id'];
@@ -73,7 +73,7 @@ class Xmlrpc {
         echo var_dump($mensaje);
         $resp = $this->client->send($mensaje);
         if ($resp->faultCode()) {
-            die('KO. Error new post: ' . $resp->faultCode() . ' - ' . $resp->faultString());
+            return 'KO. Error new post: ' . $resp->faultCode() . ' - ' . $resp->faultString();
         }
         return $resp->val;
     }
@@ -87,7 +87,7 @@ class Xmlrpc {
         $resp = $this->client->send($mensaje);
 
         if ($resp->faultCode()) {
-            die('KO. Error get post: ' . $resp->faultCode() . ' - ' . $resp->faultString());
+           return 'KO. Error get post: ' . $resp->faultCode() . ' - ' . $resp->faultString();
         }
         return var_dump($resp->value);
     }
@@ -112,7 +112,7 @@ class Xmlrpc {
         $resp = $this->client->send($mensaje);
 
         if ($resp->faultCode()) {
-            die('KO. Error create page: ' . $resp->faultCode() . ' - ' . $resp->faultString());
+            return 'KO. Error create page: ' . $resp->faultCode() . ' - ' . $resp->faultString();
         }
         return $resp->value;
     }
@@ -126,7 +126,7 @@ class Xmlrpc {
         $resp = $this->client->send($mensaje);
 
         if ($resp->faultCode()) {
-            die('KO. Error display authors: ' . $resp->faultCode() . ' - ' . $resp->faultString());
+           return 'KO. Error display authors: ' . $resp->faultCode() . ' - ' . $resp->faultString();
         }
         return $resp->value;
     }
