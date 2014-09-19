@@ -16,7 +16,7 @@ class Xmlrpc {
     private $client = "";
     private $UserName = "";  // Nombre de usuario admin del sitio.
     private $PassWord = "";  // Pass del usuario.
-
+   
 // Constructor
 
     public function __construct() {
@@ -27,20 +27,24 @@ class Xmlrpc {
         $this->client = new \xmlrpc_client($xmlrpcurl);
         $this->client->return_type = 'phpvals';
         $this->UserName = $username;
-        $this->PassWord = $password;
+        $this->PassWord = $password;        
     }
 
     function featured_image($urlImg) {
         $fh = fopen($urlImg, 'r');
         $fs = filesize($urlImg);
         $theData = fread($fh, $fs);
+        $file = pathinfo($urlImg);
+        $imageName = $file['basename'];
+        $type = 'image/'.$file['extension'];
+        $overwrite = true;
         fclose($fh);
         $this->client->setDebug(2); // quiero que me muestre todo el proceso!
         $mensaje = new \xmlrpcmsg('wp.uploadFile');
-        $mensaje->addParam(new \xmlrpcval(1, "int"));
+        $mensaje->addParam(new \xmlrpcval(1, "int")); // 1
         $mensaje->addParam(new \xmlrpcval($this->UserName));
         $mensaje->addParam(new \xmlrpcval($this->PassWord));
-        $mensaje->addParam(php_xmlrpc_encode(array('name' => 'imagen' . mt_rand() . '.jpg', 'type' => 'image/jpg', 'bits' => new \xmlrpcval($theData, 'base64'), 'overwrite' => true)));
+        $mensaje->addParam(php_xmlrpc_encode(array('name' => $imageName, 'type' => $type, 'bits' => new \xmlrpcval($theData, 'base64'), 'overwrite' => $overwrite)));
         $resp = $this->client->send($mensaje);
         if ($resp->faultCode()) {
            return 'KO. Error uploading: ' . $resp->faultCode() . ' - ' . $resp->faultString();
