@@ -1,7 +1,9 @@
 xmlrpc-laravel-package
 ======================
 
-Package to use xmlrpc (wordpress posts) with laravel
+Package to use xmlrpc (wordpress posts) with laravel 4
+
+
 
 
 Installation:
